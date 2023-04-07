@@ -6,10 +6,43 @@ void main() {
   runApp(myapplication());
 }
 
-class myapplication extends StatelessWidget {
+class myapplication extends StatefulWidget {
   myapplication({super.key});
 
+  @override
+  State<myapplication> createState() => _myapplicationState();
+}
+
+class _myapplicationState extends State<myapplication> {
   List<String> title = ['Antor', 'Sihab', 'Fahad', 'Misbaul'];
+  int i = 0;
+  final scrren = [
+    Center(
+        child: Text(
+      'Page 1',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    )),
+    Center(
+        child: Text(
+      'Page 2',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    )),
+    Center(
+        child: Text(
+      'Page 3',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    )),
+    Center(
+        child: Text(
+      'Page 4',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    )),
+    Center(
+        child: Text(
+      'Page 5',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    )),
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -317,7 +350,6 @@ class myapplication extends StatelessWidget {
         //     ],
         //   ),
         // ),
-
         drawer: Drawer(
           child: ListView(
             children: [
@@ -380,64 +412,84 @@ class myapplication extends StatelessWidget {
                 title: Text('Contact Number'),
                 onTap: () => {},
               ),
-              Padding(
-                padding: EdgeInsets.all(14),
-                child: Text('Items'),
-              ),
-              ListTile(
-                iconColor: Colors.amberAccent,
-                leading: CircleAvatar(
-                    child: Icon(Icons.home), backgroundColor: Colors.blueGrey),
-                title: Text('Home'),
-                onTap: () => {},
-              ),
-              ListTile(
-                leading: CircleAvatar(
-                    child: Icon(Icons.email), backgroundColor: Colors.blueGrey),
-                title: Text('Email'),
-                onTap: () => {},
-              ),
-              Padding(
-                padding: EdgeInsets.all(14),
-                child: Text('Items'),
-              ),
-              ListTile(
-                iconColor: Colors.amberAccent,
-                leading: CircleAvatar(
-                    child: Icon(Icons.home), backgroundColor: Colors.blueGrey),
-                title: Text('Home'),
-                onTap: () => {},
-              ),
-              ListTile(
-                leading: CircleAvatar(
-                    child: Icon(Icons.email), backgroundColor: Colors.blueGrey),
-                title: Text('Email'),
-                onTap: () => {},
-              ),
             ],
           ),
         ),
-        body: Container(
-          child: Container(
-              child: ListView.builder(
-            itemCount: title.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  child: Icon(
-                    Icons.camera_alt,
-                  ),
-                  backgroundColor: Colors.blueAccent,
-                ),
-                title: Text(title[index]),
-                subtitle: Text('Mymensingh Engineering college'),
-                trailing: CircleAvatar(
-                    child: Icon(Icons.lock_clock),
-                    backgroundColor: Colors.amberAccent),
-                onTap: () => {},
-              );
-            },
-          )),
+        // body: Container(
+        //   child: Container(
+        //       child: ListView.builder(
+        //     itemCount: title.length,
+        //     itemBuilder: (context, index) {
+        //       return ListTile(
+        //         leading: CircleAvatar(
+        //           child: Icon(
+        //             Icons.camera_alt,
+        //           ),
+        //           backgroundColor: Colors.blueAccent,
+        //         ),
+        //         title: Text(title[index]),
+        //         subtitle: Text('Mymensingh Engineering college'),
+        //         trailing: CircleAvatar(
+        //             child: Icon(Icons.lock_clock),
+        //             backgroundColor: Colors.amberAccent),
+        //         onTap: () => {},
+        //       );
+        //     },
+        //   )),
+        // ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () => {print('Extended FAB clicked')},
+          extendedTextStyle: TextStyle(color: Colors.white),
+          label: Text('Add new'),
+          backgroundColor: Colors.redAccent,
+          autofocus: true,
+          icon: Icon(Icons.add_a_photo),
+          extendedIconLabelSpacing: 10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        ),
+        bottomNavigationBar: NavigationBarTheme(
+          data: NavigationBarThemeData(
+              iconTheme:
+                  MaterialStatePropertyAll(IconThemeData(color: Colors.blue)),
+              indicatorColor: Colors.amber,
+              labelTextStyle: MaterialStateProperty.all(TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black54))),
+          child: NavigationBar(
+            elevation: 20,
+            labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+            animationDuration: Duration(seconds: 2),
+            selectedIndex: i,
+            onDestinationSelected: (i) => setState(() => this.i = i),
+            backgroundColor: Colors.yellow.shade400,
+            destinations: [
+              NavigationDestination(
+                icon: Icon(Icons.home_outlined),
+                label: 'Android',
+                selectedIcon: Icon(Icons.home),
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.email_outlined),
+                label: 'Email',
+                selectedIcon: Icon(Icons.email),
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.lock_clock_outlined),
+                label: 'Clock',
+                selectedIcon: Icon(Icons.lock_clock),
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.settings_outlined),
+                label: 'Settings',
+                selectedIcon: Icon(Icons.settings),
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.phone_android_outlined),
+                label: 'Android',
+                selectedIcon: Icon(Icons.phone_android),
+              ),
+            ],
+          ),
         ),
       ),
     );
